@@ -1,4 +1,5 @@
 import {useState, useRef} from 'react'
+import Recipecard from "./Recipecard";
 
 function Upload() {
 
@@ -88,34 +89,28 @@ function Upload() {
     }
 
     return (
-        <div className='d-flex-center bg'>
+
+        <div className='d-flex-center'>
             <div className="uploadCard d-flex-center">
                 <h3>Upload your recipe!</h3>
+
                 <input ref={title} type='text' placeholder='Write recipe title' onChange={setTitle}/>
+
                 <input ref={image} type='text' placeholder='Insert image url'/>
                 <div className='btn' onClick={addImage}>Add image</div>
+
                 <input ref={ingredient} type='text' placeholder='Write ingredient'/>
                 <input ref={amount} type='text' placeholder='How many (g, ml, sp)'/>
                 <div className='btn' onClick={addIngredient}>Add ingredient</div>
+
                 <input ref={prep} type='text' placeholder='Write prep directions by step'/>
                 <div className='btn' onClick={addPrep}>Add direction</div>
+
                 <small style={{color: 'darkred'}}>{errorMsg}</small>
                 <div onClick={submit} className='submit'>SUBMIT</div>
             </div>
 
-            <div className="uploadCard d-flex-center">
-                <h3>{recipe.title}</h3>
-                <img className='imageMain' src={recipe.image[0]} alt=""/>
-                <div className='images'>
-                    {recipe.image.map((item, i) => i !== 0 ? <img src={item} alt="" key={i}/> : null)}
-                </div>
-                <ul>
-                    {recipe.ingredients.map((item, i) => <li key={i}>{item.ingredient}, {item.amount}</li>)}
-                </ul>
-                <ol>
-                    {recipe.prep.map((item, i) => <li key={i}>{item}</li>)}
-                </ol>
-            </div>
+            <Recipecard recipe={recipe} />
         </div>
     );
 }

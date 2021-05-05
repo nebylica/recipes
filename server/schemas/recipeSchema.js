@@ -17,7 +17,11 @@ const recipeSchema = new Schema({
     prep: {
         type: Array,
         required: true
+    },
+    reviews: {
+        type: Array,
+        required: false
     }
 })
 
-module.exports = mongoose.model("recipes", recipeSchema)
+module.exports = mongoose.model("recipesModel", recipeSchema)
