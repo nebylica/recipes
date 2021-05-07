@@ -85,6 +85,8 @@ function Upload() {
                     setErrorMsg(data.msg)
                 }
                 title.current.value = null
+
+                window.location.href = '/'
             })
     }
 
@@ -110,7 +112,7 @@ function Upload() {
                 <div onClick={submit} className='submit'>SUBMIT</div>
             </div>
 
-            <Recipecard recipe={recipe} />
+            <Recipecard recipe={recipe} favorite={false}/>
         </div>
     );
 }

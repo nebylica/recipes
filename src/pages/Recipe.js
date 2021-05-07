@@ -20,7 +20,7 @@ function Recipe() {
     return (
         !!recipe && (
             <div className='d-flex-center-start'>
-                <Recipecard recipe={recipe} />
+                <Recipecard recipe={recipe} favorite={true}/>
                 <Reviews />
             </div>
         )
