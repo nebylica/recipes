@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import RenderAllRecipes from "../components/RenderAllRecipes";
 
 function Favorites() {
     const [recipes, setRecipes] = useState([])
@@ -12,22 +12,8 @@ function Favorites() {
             })
     }, [])
 
-    console.log(recipes)
-
     return (
-        <div className='d-flex-wrap'>
-
-            {recipes.map((item, i) => (
-                <Link to={'/recipe/'+item._id}
-                      key={i}
-                      className='recipeCard'
-                >
-                    <img src={item.image[0]} alt=""/>
-                    <h3>{item.title}</h3>
-                </Link>
-            ))}
-
-        </div>
+        <RenderAllRecipes recipes={recipes}/>
     );
 }
 

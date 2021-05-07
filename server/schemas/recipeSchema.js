@@ -12,15 +12,19 @@ const recipeSchema = new Schema({
     },
     ingredients: {
         type: Array,
-        required: true
+        required: true,
     },
     prep: {
         type: Array,
-        required: true
+        required: true,
     },
     reviews: {
         type: Array,
-        required: false
+        required: true
+    },
+    addedToFavorites: {
+        type: Boolean,
+        required: true
     }
 })
 

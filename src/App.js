@@ -4,11 +4,12 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
-import {useState} from "react"
-import Upload from "./components/Upload";
-import Home from "./components/Home";
+import Upload from "./pages/Upload";
+import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
-import Recipe from "./components/Recipe";
+import Recipe from "./pages/Recipe";
+import Favorites from "./pages/Favorites";
+import FindRecipe from "./pages/FindRecipe";
 
 
 function App() {
@@ -26,6 +27,12 @@ function App() {
                     </Route>
                     <Route path="/recipe/:id">
                         <Recipe/>
+                    </Route>
+                    <Route path="/favorites">
+                        <Favorites/>
+                    </Route>
+                    <Route path="/find">
+                        <FindRecipe/>
                     </Route>
                 </Switch>
             </div>

@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from 'react';
-import Recipecard from "./Recipecard";
-import Reviews from "./Reviews";
+import RecipeCard from "../components/RecipeCard";
+import Reviews from "../components/Reviews";
 
 
 function Recipe() {
@@ -20,7 +20,7 @@ function Recipe() {
     return (
         !!recipe && (
             <div className='d-flex-center-start'>
-                <Recipecard recipe={recipe} favorite={true}/>
+                <RecipeCard recipe={recipe} favorite={true}/>
                 <Reviews />
             </div>
         )

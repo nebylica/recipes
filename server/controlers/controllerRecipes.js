@@ -7,12 +7,15 @@ module.exports = {
     },
 
     upload : async (req, res) => {
-
         let recipe = new recipeDb
 
-        Object.keys(req.body).map(key => {
-            recipe[key] = req.body[key]
-        })
+        recipe.title = req.body.title
+        recipe.image = req.body.image
+        recipe.ingredients = req.body.ingredients
+        recipe.prep = req.body.prep
+        recipe.reviews = []
+        recipe.addedToFavorites = false
+
         await recipe.save()
 
         res.send({error: false})
@@ -24,7 +27,6 @@ module.exports = {
     },
 
     review: async (req, res) => {
-
         if(!!req.body.review) {
             await recipeDb.findByIdAndUpdate(
                 req.body.id,
@@ -34,6 +36,47 @@ module.exports = {
         const recipe = await recipeDb.findById(req.body.id)
 
         res.send({recipe})
+    },
 
+    favorite: async (req, res) => {
+        const {id} = req.params
+        const recipe = await recipeDb.findOne({_id: id})
+        await recipeDb.findOneAndUpdate({_id: id}, {$set: {addedToFavorites: !recipe.addedToFavorites}}, {new: true})
+
+        res.send({error: false, msg:'added to favorites'})
+    },
+
+    loadFavorites: async (req, res) => {
+        const recipes = await recipeDb.find({addedToFavorites: true})
+        res.send(recipes)
+    },
+
+    deleteRecipe: async (req, res) => {
+        await recipeDb.findByIdAndDelete(req.params.id)
+
+        res.send({error: false, msg: 'recipe deleted'})
+    },
+
+    findRecipe: async (req, res) => {
+
+        const prod = req.body
+        const recipes = await recipeDb.find()
+        const arr = []
+
+        recipes.map(rec => {
+            let num = 0
+            rec.ingredients.map(ingr => {
+                prod.map(item => {
+                    if(item === ingr.ingredient){
+                        num ++
+                    }
+                })
+                if(num === prod.length) {
+                    !arr.includes(rec) ? arr.push(rec) : null
+                }
+            })
+        })
+
+        res.send(arr)
     }
 }

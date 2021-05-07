@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const mainRouter = require('./router/recipesRouter.js')
 
+mongoose.set('useCreateIndex', true)
+
 app.listen(8000)
 app.use(express.json());
 app.use(cors())
